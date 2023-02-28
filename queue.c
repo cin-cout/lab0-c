@@ -37,7 +37,6 @@ void q_free(struct list_head *l)
     test_free(l);
 }
 
-
 /* Insert an element at head of queue */
 bool q_insert_head(struct list_head *head, char *s)
 {
@@ -48,14 +47,12 @@ bool q_insert_head(struct list_head *head, char *s)
     if (!q) {
         return false;
     }
-    int s_len = strlen(s);
-    q->value = malloc(s_len + 1);
+    q->value = malloc(strlen(s) + 1);
     if (!(q->value)) {
-        test_free(q);
+        free(q);
         return false;
     }
-    strncpy(q->value, s, s_len);
-    q->value[s_len] = '\0';
+    strncpy(q->value, s, strlen(s) + 1);
     list_add(&q->list, head);
     return true;
 }
@@ -70,14 +67,12 @@ bool q_insert_tail(struct list_head *head, char *s)
     if (!q) {
         return false;
     }
-    int s_len = strlen(s);
-    q->value = malloc(s_len + 1);
+    q->value = malloc(strlen(s) + 1);
     if (!(q->value)) {
-        test_free(q);
+        free(q);
         return false;
     }
-    strncpy(q->value, s, s_len);
-    q->value[s_len] = '\0';
+    strncpy(q->value, s, strlen(s) + 1);
     list_add_tail(&q->list, head);
     return true;
 }
